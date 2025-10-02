@@ -3,8 +3,10 @@ document.body.style.overflow = 'hidden'; // prevent scrolling
 let rotaryUI = document.getElementById("rotaryUI");
 let movements = document.getElementById("movements");
 
+let touchOn = false;
+
 rotaryUI.ontouchstart = () => {
-    rotaryUI.style.backgroundColor = "lightgray";
+    !touchOn && (rotaryUI.style.backgroundColor = "lightblue");
 }
 
 rotaryUI.ontouchend = () => {
@@ -13,4 +15,13 @@ rotaryUI.ontouchend = () => {
 
 rotaryUI.ontouchmove = () => {
     movements.innerHTML++;
+}
+
+
+document.ontouchstart = () => {
+    touchOn = true;
+}
+
+document.ontouchend = () => {
+    touchOn = false;
 }
