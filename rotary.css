@@ -1,0 +1,15 @@
+body {
+    overflow: hidden;
+}
+
+#rotaryUI {
+    position: fixed;
+    bottom: 1%;
+    
+    width: 80%;
+    left: 10%; /* width (80%) + 20% = 100%. 20% / 2 = 10%. */
+    
+    aspect-ratio: 1 / 1;
+    background-color: black;
+    border-radius: 50%;
+}
