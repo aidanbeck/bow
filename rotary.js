@@ -1,6 +1,7 @@
 let touchOn = false;
 
 let rotaryUI = document.getElementById("rotaryUI");
+var rotaryCoordinates = rotaryUI.getBoundingClientRect();
 
 let touch = {
     start:    { x: 0, y: 0 },
@@ -21,9 +22,7 @@ document.ontouchend = () => {
 // Touching within the rotary
 rotaryUI.ontouchstart = (event) => {
     if (!touchOn) {
-        rotaryUI.style.backgroundColor = "lightblue";
-        touch.start.x = event.touches[0].clientX;
-        touch.start.y = event.touches[0].clientY;
+        setTouchStart(event);
     }
 }
 rotaryUI.ontouchend = () => {
@@ -34,16 +33,25 @@ rotaryUI.ontouchmove = (event) => {
     touch.position.x = event.touches[0].clientX;
     touch.position.y = event.touches[0].clientY;
 
-    let touchWidth = touch.position.x - touch.start.x;
-    let touchHeight = touch.position.y - touch.start.y;
+    let touchWidth = touch.position.x - rotaryCoordinates.x;
+    let touchHeight = touch.position.y - rotaryCoordinates.y;
     let touchDifference = touch.position.x - touch.position.y;
 
-    let middle = 128; //middle of rgb spectrum
+    setRotaryBackgroundColor(touchWidth, touchHeight, touchDifference);
+}
 
-    touchWidth += middle;
-    touchHeight += middle;
-    touchDifference += middle;
+function setTouchStart(event) {
+    firstTouch = event.touches[0];
+    touch.start.x = firstTouch.clientX;
+    touch.start.y = firstTouch.clientY;
+}
 
-    rotaryUI.style.backgroundColor = `rgb(${touchWidth}, ${touchHeight}, ${touchDifference})`;
-    
+function setRotaryBackgroundColor(r, g, b) {
+    let middleOfSpectrum = 256 / 2;
+
+    r += middleOfSpectrum;
+    g += middleOfSpectrum;
+    b += middleOfSpectrum;
+
+    rotaryUI.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
