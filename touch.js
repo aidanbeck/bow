@@ -1,18 +1,3 @@
-let rotaryUI = document.getElementById("rotaryUI");
-
-// Get & mark origin of rotary
-var rotaryRectangle = rotaryUI.getBoundingClientRect();
-
-let center = {
-    x: rotaryRectangle.x + (rotaryRectangle.width / 2),
-    y: rotaryRectangle.y + (rotaryRectangle.height / 2),
-}
-
-let origin = {
-    x: rotaryRectangle.x,
-    y: rotaryRectangle.y
-}
-
 // Information about Touch interaction
 let touch = {
     on: false,
@@ -20,38 +5,60 @@ let touch = {
     position: { x: 0, y: 0 } // current position
 }
 
+class Rotary {
+
+    constructor(element) {
+        this.element = element;
+        this.element.ontouchstart = (event) => this.onTouchStart(event);
+        this.element.ontouchmove = (event) => this.onTouchMove(event);
+        this.element.ontouchend = () => this.element.style.backgroundColor = "black";
 
 
 
-// Touching within the rotary
-rotaryUI.ontouchstart = (event) => {
-    if (!touch.on) {
-        setTouchStart(event);
+        let rotaryRectangle = element.getBoundingClientRect();
+        this.origin = {
+            x: rotaryRectangle.left,
+            y: rotaryRectangle.top
+        }
+        this.center = {
+            x: rotaryRectangle.x + (rotaryRectangle.width / 2),
+            y: rotaryRectangle.y + (rotaryRectangle.height / 2),
+        }
     }
-}
-rotaryUI.ontouchend = () => {
-    rotaryUI.style.backgroundColor = "black";
-}
-rotaryUI.ontouchmove = (event) => {
-    
-    touch.position.x = event.touches[0].clientX;
-    touch.position.y = event.touches[0].clientY;
 
-    let touchWidth = touch.position.x - origin.x;
-    let touchHeight = touch.position.y - origin.y;
-    let touchDifference = touch.position.x - touch.position.y;
+    getTouchCoordinates(event) {
+        let firstTouch = event.touches[0];
+        return {
+            x: firstTouch.clientX,
+            y: firstTouch.clientY
+        }
+    }
 
-    setRotaryBackgroundColor(touchWidth, touchHeight, touchDifference);
-    setMarkerPosition(markers[1], touch.position.x, touch.position.y);
-}
+    onTouchStart(event) {
+        if (touch.on) { return; }
 
-function setTouchStart(event) {
-    firstTouch = event.touches[0];
-    touch.start.x = firstTouch.clientX;
-    touch.start.y = firstTouch.clientY;
+        let touchCoordinates = this.getTouchCoordinates(event);
+        touch.start.x = touchCoordinates.x;
+        touch.start.y = touchCoordinates.y;
 
-    setMarkerPosition(markers[0], touch.start.x, touch.start.y); // Start
-    setMarkerPosition(markers[1], touch.start.x, touch.start.y); // Current
+        setMarkerPosition(markers[0], touch.start.x, touch.start.y); // Start
+        setMarkerPosition(markers[1], touch.start.x, touch.start.y); // Current
+
+    }
+
+    onTouchMove(event) {
+        let touchCoordinates = this.getTouchCoordinates(event);
+        touch.position.x = touchCoordinates.x;
+        touch.position.y = touchCoordinates.y;
+
+        setMarkerPosition(markers[1], touch.position.x, touch.position.y);
+        setRotaryBackgroundColor(
+            touch.position.x - this.center.x, // width
+            touch.position.y - this.center.y, // height
+            touch.position.x - touch.position.y // difference
+        );
+    }
+
 }
 
 /*

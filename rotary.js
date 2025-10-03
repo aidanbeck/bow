@@ -1,3 +1,4 @@
+let rotary = new Rotary(document.getElementById("rotary"));
 let markers = document.getElementsByClassName("marker");
 
 setMarkerPosition(markers[2], origin.x, origin.y);
@@ -13,5 +14,5 @@ function setRotaryBackgroundColor(r, g, b) {
     g += middleOfSpectrum;
     b += middleOfSpectrum;
 
-    rotaryUI.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    rotary.element.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
