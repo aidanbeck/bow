@@ -1,7 +1,7 @@
 let rotary = new Rotary(document.getElementById("rotary"));
 let markers = document.getElementsByClassName("marker");
 
-setMarkerPosition(markers[2], origin.x, origin.y);
+setMarkerPosition(markers[2], rotary.center.x, rotary.center.y);
 
 function setMarkerPosition(marker, x, y) {
     marker.style.translate = `${x}px ${y}px`;

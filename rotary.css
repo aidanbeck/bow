@@ -21,9 +21,14 @@ body {
 
 .marker {
     position: absolute;
-    border-radius: 50%;
+    border-radius: 25%;
     border-top-left-radius: 0;
+    border-bottom-right-radius: 50%;
+
+    border-left: 3px ridge white;
+    border-top: 3px ridge white;
 
     background-color: rgb(200, 50, 50, 0.8);
     padding: 5px;
+    box-shadow: 1px 1px 4px;
 }
