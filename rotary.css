@@ -2,7 +2,19 @@ body {
     overflow: hidden;
 }
 
-#rotary {
+#move {
+    width: 60%;
+    bottom: 6%;
+    left: 20%;
+}
+
+#aim {
+    width: 40%;
+    bottom: 11%;
+    left: 30%;
+}
+
+.rotary {
     position: fixed;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
@@ -13,10 +25,10 @@ body {
         So, translate rotary right by 10%.
     */
     left: 10%;
+    bottom: 1%;
     
     /* aesthetics */
     background-color: black;    
-    bottom: 1%;
 }
 
 .marker {

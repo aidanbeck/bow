@@ -11,7 +11,7 @@ class Rotary {
         this.element = element;
         this.element.ontouchstart = (event) => this.onTouchStart(event);
         this.element.ontouchmove = (event) => this.onTouchMove(event);
-        this.element.ontouchend = () => this.element.style.backgroundColor = "black";
+        // this.element.ontouchend = () => this.element.style.backgroundColor = "black";
 
 
 
@@ -52,11 +52,21 @@ class Rotary {
         touch.position.y = touchCoordinates.y;
 
         setMarkerPosition(markers[1], touch.position.x, touch.position.y);
-        setRotaryBackgroundColor(
+        this.setBackgroundColor(
             touch.position.x - this.center.x, // width
             touch.position.y - this.center.y, // height
             touch.position.x - touch.position.y // difference
         );
+    }
+
+    setBackgroundColor(r, g, b) {
+        let middleOfSpectrum = 256 / 2;
+
+        r += middleOfSpectrum;
+        g += middleOfSpectrum;
+        b += middleOfSpectrum;
+
+        this.element.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 
 }

@@ -1,18 +1,11 @@
-let rotary = new Rotary(document.getElementById("rotary"));
+let selectRotary = new Rotary(document.querySelector("#select"));
+let moveRotary = new Rotary(document.querySelector("#move"));
+let aimRotary = new Rotary(document.querySelector("#aim"));
+
 let markers = document.getElementsByClassName("marker");
 
-setMarkerPosition(markers[2], rotary.center.x, rotary.center.y);
+setMarkerPosition(markers[2], selectRotary.center.x, selectRotary.center.y);
 
 function setMarkerPosition(marker, x, y) {
     marker.style.translate = `${x}px ${y}px`;
-}
-
-function setRotaryBackgroundColor(r, g, b) {
-    let middleOfSpectrum = 256 / 2;
-
-    r += middleOfSpectrum;
-    g += middleOfSpectrum;
-    b += middleOfSpectrum;
-
-    rotary.element.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
 }
