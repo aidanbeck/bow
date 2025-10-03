@@ -4,14 +4,16 @@ body {
 
 #move {
     width: 60%;
-    bottom: 6%;
     left: 20%;
+    bottom: calc(0.1 * 100vw); /* raise by 10% of screen width */
+
 }
 
 #aim {
     width: 40%;
-    bottom: 11%;
     left: 30%;
+    bottom: calc(0.2 * 100vw); /* raise by 20% of screen width */
+
 }
 
 .rotary {
@@ -25,7 +27,7 @@ body {
         So, translate rotary right by 10%.
     */
     left: 10%;
-    bottom: 1%;
+    bottom: 0%;
     
     /* aesthetics */
     background-color: black;    
