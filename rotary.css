@@ -9,29 +9,21 @@ body {
 }
 
 .rotary {
+    --layer: 0;
+
     position: fixed;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-
-    width: var(--uiWidth);
-    left: calc( (100% - var(--uiWidth)) / 2 ); /* Get leftover space. Divide it by two. Move right by that much to center it. */
-    bottom: var(--uiRaise);
-    
-    /* aesthetics */
-    background-color: black;    
-}
-
-.layer {
-    --layer: 2;
 
     --width: calc( var(--uiWidth) - (var(--widthDecrease) * var(--layer)) );
     --extraSpace: calc( 100vw - var(--width) );
     width: var(--width);
     left: calc( var(--extraSpace) / 2 ); /* Like in .rotary, but use it's own width. */
     bottom: calc( (var(--widthDecrease) / 2) * var(--layer) + var(--uiRaise));
+    
+    /* aesthetics */
+    background-color: black;    
 }
-
-
 
 .marker {
     position: absolute;
