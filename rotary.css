@@ -4,21 +4,26 @@ body {
 
 #rotaryUI {
     position: fixed;
-    bottom: 1%;
-    
-    width: 80%;
-    left: 10%; /* width (80%) + 20% = 100%. 20% / 2 = 10%. */
-    
     aspect-ratio: 1 / 1;
-    background-color: black;
     border-radius: 50%;
+    width: 80%;
+
+    /*
+        The width is 80%. 20% is left over. Half of that is 10%
+        So, translate rotary right by 10%.
+    */
+    left: 10%;
+    
+    /* aesthetics */
+    background-color: black;    
+    bottom: 1%;
 }
 
 .marker {
     position: absolute;
-    background-color: red;
     border-radius: 50%;
     border-top-left-radius: 0;
 
+    background-color: rgb(200, 50, 50, 0.8);
     padding: 5px;
 }

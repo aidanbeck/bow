@@ -1,18 +1,22 @@
-let markers = document.getElementsByClassName("marker");
+// Get HTML elements
 let rotaryUI = document.getElementById("rotaryUI");
+let markers = document.getElementsByClassName("marker");
 
-let touch = {
-    on: false,
-    start:    { x: 0, y: 0 },
-    position: { x: 0, y: 0 } // current position
-}
-
+// Get & mark origin of rotary
 var rotaryCoordinates = rotaryUI.getBoundingClientRect();
 let origin = {
     x: rotaryCoordinates.x + (rotaryCoordinates.width / 2),
     y: rotaryCoordinates.y + (rotaryCoordinates.height / 2)
 }
 setMarkerPosition(markers[2], origin.x, origin.y);
+
+// Information about Touch interaction
+let touch = {
+    on: false,
+    start:    { x: 0, y: 0 },
+    position: { x: 0, y: 0 } // current position
+}
+
 
 /*
     Toggle `touch.on` when anywhere on document is touched.
@@ -24,7 +28,6 @@ document.ontouchstart = () => {
 document.ontouchend = () => {
     touch.on = false;
 }
-
 
 // Touching within the rotary
 rotaryUI.ontouchstart = (event) => {
@@ -48,6 +51,7 @@ rotaryUI.ontouchmove = (event) => {
     setMarkerPosition(markers[1], touch.position.x, touch.position.y);
 }
 
+// Helper Functions
 function setTouchStart(event) {
     firstTouch = event.touches[0];
     touch.start.x = firstTouch.clientX;
@@ -55,6 +59,10 @@ function setTouchStart(event) {
 
     setMarkerPosition(markers[0], touch.start.x, touch.start.y); // Start
     setMarkerPosition(markers[1], touch.start.x, touch.start.y); // Current
+}
+
+function setMarkerPosition(marker, x, y) {
+    marker.style.translate = `${x}px ${y}px`;
 }
 
 function setRotaryBackgroundColor(r, g, b) {
@@ -65,8 +73,4 @@ function setRotaryBackgroundColor(r, g, b) {
     b += middleOfSpectrum;
 
     rotaryUI.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-}
-
-function setMarkerPosition(marker, x, y) {
-    marker.style.translate = `${x}px ${y}px`;
 }
