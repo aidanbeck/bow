@@ -1,37 +1,37 @@
+:root {
+    --uiWidth: 100%;
+    --widthDecrease: 20%; /* how much each inner rotary's width should decrease by. Determines "ring" size. */
+    --uiRaise: 10%;
+}
+
 body {
     overflow: hidden;
-}
-
-#move {
-    width: 60%;
-    left: 20%;
-    bottom: calc(0.1 * 100vw); /* raise by 10% of screen width */
-
-}
-
-#aim {
-    width: 40%;
-    left: 30%;
-    bottom: calc(0.2 * 100vw); /* raise by 20% of screen width */
-
 }
 
 .rotary {
     position: fixed;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
-    width: 80%;
 
-    /*
-        The width is 80%. 20% is left over. Half of that is 10%
-        So, translate rotary right by 10%.
-    */
-    left: 10%;
-    bottom: 0%;
+    width: var(--uiWidth);
+    left: calc( (100% - var(--uiWidth)) / 2 ); /* Get leftover space. Divide it by two. Move right by that much to center it. */
+    bottom: var(--uiRaise);
     
     /* aesthetics */
     background-color: black;    
 }
+
+.layer {
+    --layer: 2;
+
+    --width: calc( var(--uiWidth) - (var(--widthDecrease) * var(--layer)) );
+    --extraSpace: calc( 100vw - var(--width) );
+    width: var(--width);
+    left: calc( var(--extraSpace) / 2 ); /* Like in .rotary, but use it's own width. */
+    bottom: calc( 10vw * var(--layer) + var(--uiRaise));
+}
+
+
 
 .marker {
     position: absolute;
