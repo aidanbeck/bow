@@ -12,8 +12,7 @@ let origin = {
     x: rotaryCoordinates.x + (rotaryCoordinates.width / 2),
     y: rotaryCoordinates.y + (rotaryCoordinates.height / 2)
 }
-markers[2].style.left = origin.x + "px";
-markers[2].style.top = origin.y + "px";
+setMarkerPosition(markers[2], origin.x, origin.y);
 
 /*
     Toggle `touch.on` when anywhere on document is touched.
@@ -46,9 +45,7 @@ rotaryUI.ontouchmove = (event) => {
     let touchDifference = touch.position.x - touch.position.y;
 
     setRotaryBackgroundColor(touchWidth, touchHeight, touchDifference);
-
-    markers[1].style.left = touch.position.x + "px";
-    markers[1].style.top = touch.position.y + "px";
+    setMarkerPosition(markers[1], touch.position.x, touch.position.y);
 }
 
 function setTouchStart(event) {
@@ -56,8 +53,8 @@ function setTouchStart(event) {
     touch.start.x = firstTouch.clientX;
     touch.start.y = firstTouch.clientY;
 
-    markers[0].style.left = touch.start.x + "px";
-    markers[0].style.top = touch.start.y + "px";
+    setMarkerPosition(markers[0], touch.start.x, touch.start.y); // Start
+    setMarkerPosition(markers[1], touch.start.x, touch.start.y); // Current
 }
 
 function setRotaryBackgroundColor(r, g, b) {
@@ -68,4 +65,8 @@ function setRotaryBackgroundColor(r, g, b) {
     b += middleOfSpectrum;
 
     rotaryUI.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+}
+
+function setMarkerPosition(marker, x, y) {
+    marker.style.translate = `${x}px ${y}px`;
 }
