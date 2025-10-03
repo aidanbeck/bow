@@ -1,7 +1,7 @@
 :root {
-    --uiWidth: 100%;
-    --widthDecrease: 20%; /* how much each inner rotary's width should decrease by. Determines "ring" size. */
-    --uiRaise: 10%;
+    --uiWidth: 70%;
+    --widthDecrease: 20vw; /* how much each inner rotary's width should decrease by. Determines "ring" size. Must be vw */
+    --uiRaise: 2%;
 }
 
 body {
@@ -28,7 +28,7 @@ body {
     --extraSpace: calc( 100vw - var(--width) );
     width: var(--width);
     left: calc( var(--extraSpace) / 2 ); /* Like in .rotary, but use it's own width. */
-    bottom: calc( 10vw * var(--layer) + var(--uiRaise));
+    bottom: calc( (var(--widthDecrease) / 2) * var(--layer) + var(--uiRaise));
 }
 
 
